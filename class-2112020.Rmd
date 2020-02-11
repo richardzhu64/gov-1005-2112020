@@ -1,0 +1,25 @@
+---
+title: "class-2112020"
+author: "Richard Zhu"
+date: "2/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+library(janitor)
+```
+
+```{r}
+enrollment <- read_excel("class_enrollment_summary_by_term_2.11.20.xlsx", skip=3) %>%
+  clean_names() %>%
+  filter(u_grad < 20000)
+
+enrollment_gov <- enrollment %>%
+    filter(`course_department` == "Government") %>%
+    arrange(desc(total))
+
+head(enrollment_gov)
+```
